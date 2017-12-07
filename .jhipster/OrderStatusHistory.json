@@ -1,0 +1,50 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "operatorType",
+            "otherEntityName": "operatorType",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipName": "order",
+            "otherEntityName": "order",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipName": "oldStatus",
+            "otherEntityName": "orderStatus",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipName": "newStatus",
+            "otherEntityName": "orderStatus",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "modifiedTime",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "desc",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        },
+        {
+            "fieldName": "operatorCode",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20171206103453",
+    "dto": "mapstruct",
+    "service": "serviceClass",
+    "entityTableName": "order_status_history",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pager"
+}

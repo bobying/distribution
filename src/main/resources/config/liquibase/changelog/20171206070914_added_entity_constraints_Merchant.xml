@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Merchant.
+    -->
+    <changeSet id="20171206070914-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="merchant_type_id"
+                                 baseTableName="merchant"
+                                 constraintName="fk_merchant_merchant_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="merchant_type"/>
+
+        <addForeignKeyConstraint baseColumnNames="merchant_audit_status_id"
+                                 baseTableName="merchant"
+                                 constraintName="fk_merchant_merchant_audit_status_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="merchant_audit_status"/>
+
+        <addForeignKeyConstraint baseColumnNames="merchant_status_id"
+                                 baseTableName="merchant"
+                                 constraintName="fk_merchant_merchant_status_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="merchant_status"/>
+
+        <addForeignKeyConstraint baseColumnNames="parent_id"
+                                 baseTableName="merchant"
+                                 constraintName="fk_merchant_parent_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="merchant"/>
+
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,21 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "desc",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        }
+    ],
+    "changelogDate": "20171206065802",
+    "dto": "mapstruct",
+    "service": "serviceClass",
+    "entityTableName": "merchant_type",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pager"
+}

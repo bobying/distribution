@@ -5,6 +5,36 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171206065802_added_entity_MerchantType.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171206070355_added_entity_MerchantAuditStatus.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171206070914_added_entity_Merchant.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171206071816_added_entity_ProductType.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171206072220_added_entity_ProductStatus.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171206073233_added_entity_Currency.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171206074132_added_entity_Product.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171206074332_added_entity_MerchantStatus.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171206084829_added_entity_OrderType.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171206085609_added_entity_Status.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171206092602_added_entity_OrderStatus.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171206102057_added_entity_PayType.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171206102730_added_entity_Order.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171206103239_added_entity_OperatorType.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171206103453_added_entity_OrderStatusHistory.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171206115401_added_entity_CommissionPlaceholder.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20171206070914_added_entity_constraints_Merchant.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171206074132_added_entity_constraints_Product.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171206074332_added_entity_constraints_MerchantStatus.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171206070355_added_entity_constraints_MerchantAuditStatus.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171206073233_added_entity_constraints_Currency.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171206071816_added_entity_constraints_ProductType.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171206072220_added_entity_constraints_ProductStatus.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171206084829_added_entity_constraints_OrderType.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171206092602_added_entity_constraints_OrderStatus.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171206102057_added_entity_constraints_PayType.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171206102730_added_entity_constraints_Order.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171206103239_added_entity_constraints_OperatorType.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171206103453_added_entity_constraints_OrderStatusHistory.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171206115401_added_entity_constraints_CommissionPlaceholder.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>
