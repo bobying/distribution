@@ -1,0 +1,385 @@
+/**
+ * 各种词条状态:激活、失效、删除
+ * @author bobying.
+ */
+entity Status {
+	name String required minlength(1)  maxlength(20)
+    code String required minlength(1)  maxlength(10) pattern(/^[a-zA-Z]+[a-zA-Z0-9_]*$/)
+    desc TextBlob
+}
+
+/**
+ * 货币；
+ * .
+ * @author bobying.
+ */
+entity Currence {
+	name String required minlength(1)  maxlength(20)
+    code String required minlength(1)  maxlength(10) pattern(/^[a-zA-Z]+[a-zA-Z0-9_]*$/)
+    desc TextBlob
+}
+relationship ManyToOne {
+	Currence{status} to Status
+}
+
+/**
+ * 用户；
+ * @author bobying.
+ */
+entity User {
+	name String required minlength(1)  maxlength(20)
+    code String required minlength(1)  maxlength(20) pattern(/^[a-zA-Z]+[a-zA-Z0-9_]*$/)
+    desc TextBlob
+}
+
+/**
+ * 商家状态，可配置，非enum，开张、关闭、暂时关闭
+ * @author bobying.
+ */
+entity MerchantStatus {
+	name String required minlength(1)  maxlength(20)
+    code String required minlength(1)  maxlength(10) pattern(/^[a-zA-Z]+[a-zA-Z0-9_]*$/)
+    desc TextBlob
+}
+relationship ManyToOne {
+	MerchantStatus{status} to Status
+}
+
+/**
+ * 商家类型，可配置，非enum：商家、个人、代理、渠道
+ * @author bobying.
+ */
+entity MerchantType {
+	name String required minlength(1)  maxlength(20)
+    code String required minlength(1)  maxlength(10) pattern(/^[a-zA-Z]+[a-zA-Z0-9_]*$/)
+    desc TextBlob
+}
+relationship ManyToOne {
+	MerchantType{status} to Status
+}
+
+/**
+ * 商家审核状态，可配置，非enum：未审核，提交审核、审核通过、审核驳回
+ * @author bobying.
+ */
+entity MerchantAuditStatus {
+	name String required minlength(1)  maxlength(20)
+    code String required minlength(1)  maxlength(10) pattern(/^[a-zA-Z]+[a-zA-Z0-9_]*$/)
+    desc TextBlob
+}
+relationship ManyToOne {
+	MerchantAuditStatus{status} to Status
+}
+
+/**
+ * 商家
+ * @author bobying.
+ */
+entity Merchant {
+	name String required minlength(1)  maxlength(50)
+    code String required minlength(1)  maxlength(20) pattern(/^[a-zA-Z]+[a-zA-Z0-9_]*$/)
+    desc TextBlob
+    level Long
+    address String
+    mobile String
+}
+relationship ManyToOne {
+	Merchant{merchantType} to MerchantType
+	Merchant{merchantStatus} to MerchantStatus
+	Merchant{auditStatus} to MerchantAuditStatus
+}
+relationship OneToMany {
+	Merchant{child(name)} to Merchant{parent(name)}
+}
+
+/**
+ * 操作类型，可配置，非enum：用户操作、运营人员操作、系统操作
+ * @author bobying.
+ */
+entity OperatorType {
+	name String required minlength(1)  maxlength(20)
+    code String required minlength(1)  maxlength(10) pattern(/^[a-zA-Z]+[a-zA-Z0-9_]*$/)
+    desc TextBlob
+}
+relationship ManyToOne {
+	OperatorType{status} to Status
+}
+
+/**
+ * 产品分类，支持子目录
+ * @author bobying.
+ */
+entity ProductCatalog {
+	name String required minlength(1)  maxlength(50)
+    code String required minlength(1)  maxlength(20) pattern(/^[a-zA-Z]+[a-zA-Z0-9_]*$/)
+    desc TextBlob
+}
+relationship ManyToOne {
+	ProductCatalog{status} to Status
+	ProductCatalog{parent} to ProductCatalog
+}
+
+/**
+ * 产品状态：上架，下架，删除
+ * @author bobying.
+ */
+entity ProductStatus {
+	name String required minlength(1)  maxlength(20)
+    code String required minlength(1)  maxlength(10) pattern(/^[a-zA-Z]+[a-zA-Z0-9_]*$/)
+    desc TextBlob
+}
+relationship ManyToOne {
+	ProductStatus{status} to Status
+}
+
+/**
+ * 产品审核状态：待审核、审核通过、审核驳回
+ * @author bobying.
+ */
+entity ProductAuditStatus {
+	name String required minlength(1)  maxlength(20)
+    code String required minlength(1)  maxlength(10) pattern(/^[a-zA-Z]+[a-zA-Z0-9_]*$/)
+    desc TextBlob
+}
+relationship ManyToOne {
+	ProductAuditStatus{status} to Status
+}
+
+/**
+ * 产品：
+ * @author bobying.
+ */
+entity Product {
+	name String required minlength(1)  maxlength(50)
+    code String required minlength(1)  maxlength(20) pattern(/^[a-zA-Z]+[a-zA-Z0-9_]*$/)
+    desc TextBlob
+    price Long
+    remains Long
+}
+relationship ManyToOne {
+	Product{productCatalog} to ProductCatalog
+	Product{productStatus} to ProductStatus
+	Product{auditStatus} to ProductAuditStatus
+	Product{parent} to Product
+	Product{merchant} to Merchant
+}
+
+/**
+ * 支付类型：银联支付、微信支付、支付宝支付、佣金支付、积分支付、混合支付
+ * @author bobying.
+ */
+entity PayType {
+	name String required minlength(1)  maxlength(20)
+    code String required minlength(1)  maxlength(10) pattern(/^[a-zA-Z]+[a-zA-Z0-9_]*$/)
+    desc TextBlob
+}
+relationship ManyToOne {
+	PayType{status} to Status
+}
+
+/**
+ * 订单类型：单品订单、多商品订单
+ * @author bobying.
+ */
+entity OrderType {
+	name String required minlength(1)  maxlength(20)
+    code String required minlength(1)  maxlength(10) pattern(/^[a-zA-Z]+[a-zA-Z0-9_]*$/)
+    desc TextBlob
+}
+relationship ManyToOne {
+	OrderType{status} to Status
+}
+
+/**
+ * 订单状态： 参见京东
+ * @author bobying.
+ */
+entity OrderStatus {
+	name String required minlength(1)  maxlength(20)
+    code String required minlength(1)  maxlength(10) pattern(/^[a-zA-Z]+[a-zA-Z0-9_]*$/)
+    desc TextBlob
+}
+relationship ManyToOne {
+	OrderStatus{status} to Status
+}
+
+/**
+ * 订单：
+ * @author bobying.
+ */
+entity COrder {
+	name String required minlength(1)  maxlength(50)
+    code String required minlength(1)  maxlength(20) pattern(/^[a-zA-Z]+[a-zA-Z0-9_]*$/)
+    desc TextBlob
+    amount Long
+    createdDate Instant
+}
+relationship ManyToOne {
+	Order{orderType} to OrderType
+	Order{orderStatus} to OrderStatus
+	Order{product} to Product
+	Order{merchant} to Merchant
+	Order{buyer} to User
+}
+
+/**
+ * 订单历史记录：
+ * @author bobying.
+ */
+entity OrderHistory {
+    desc TextBlob
+    modifiedDate Instant
+}
+relationship ManyToOne {
+	OrderHistory{order} to COrder
+	OrderHistory{operator} to User
+	OrderHistory{operatorType} to OperatorType
+	OrderHistory{oldStatus} to OrderStatus
+	OrderHistory{oldStatus} to OrderStatus
+}
+
+/**
+ * 佣金规则类型：
+ * @author bobying.
+ */
+entity CommissionRuleType {
+	name String required minlength(1)  maxlength(20)
+    code String required minlength(1)  maxlength(10) pattern(/^[a-zA-Z]+[a-zA-Z0-9_]*$/)
+    desc TextBlob
+}
+relationship ManyToOne {
+	CommissionRuleType{status} to Status
+}
+
+/**
+ * 触发器类型：定时，订单，分享...
+ * @author bobying.
+ */
+entity TriggerType {
+	name String required minlength(1)  maxlength(20)
+    code String required minlength(1)  maxlength(20) pattern(/^[a-zA-Z]+[a-zA-Z0-9_]*$/)
+    desc TextBlob
+}
+relationship ManyToOne {
+	TriggerType{status} to Status
+}
+
+/**
+ * 占位符：订单价格、商品价格、商家等级、用户等级...
+ * @author bobying.
+ */
+entity PlaceholderType {
+	name String required minlength(1)  maxlength(20)
+    code String required minlength(1)  maxlength(10) pattern(/^[a-zA-Z]+[a-zA-Z0-9_]*$/)
+    desc TextBlob
+}
+relationship ManyToOne {
+	PlaceholderType{status} to Status
+}
+
+/**
+ * 佣金来源类型：订单，APP分享
+ * @author bobying.
+ */
+entity CommissionSourceType {
+	name String required minlength(1)  maxlength(20)
+    code String required minlength(1)  maxlength(10) pattern(/^[a-zA-Z]+[a-zA-Z0-9_]*$/)
+    desc TextBlob
+    triggerParams String
+    calculation String
+}
+
+/**
+ * 佣金规则模板：
+ * @author bobying.
+ */
+entity CommissionRuleTemplate {
+	name String required minlength(1)  maxlength(20)
+    code String required minlength(1)  maxlength(10) pattern(/^[a-zA-Z]+[a-zA-Z0-9_]*$/)
+    desc TextBlob
+    triggerParams String
+    calculation String
+}
+relationship ManyToOne {
+	CommissionRuleTemplate{status} to Status
+	CommissionRuleTemplate{type} to CommissionRuleType
+	CommissionRuleTemplate{owner} to Merchant
+	CommissionRuleTemplate{triggerType} to TriggerType
+}
+
+/**
+ * 佣金规则：
+ * @author bobying.
+ */
+entity CommissionRule {
+	name String required minlength(1)  maxlength(20)
+    code String required minlength(1)  maxlength(10) pattern(/^[a-zA-Z]+[a-zA-Z0-9_]*$/)
+    desc TextBlob
+    triggerParams String
+    calculation String
+}
+relationship ManyToOne {
+	CommissionRule{status} to Status
+	CommissionRule{type} to CommissionRuleType
+	CommissionRule{trigger} to Trigger
+	CommissionRule{owner} to Merchant
+	CommissionRule{applyTo} to Merchant
+}
+
+/**
+ * 触发器
+ * @author bobying.
+ */
+entity Trigger {
+    desc TextBlob
+}
+relationship ManyToOne {
+	Trigger{type} to TriggerType
+}
+
+/**
+ * 佣金审核状态：待审核，审核通过、审核驳回
+ * @author bobying.
+ */
+entity CommissionAuditStatus {
+	name String required minlength(1)  maxlength(20)
+    code String required minlength(1)  maxlength(10) pattern(/^[a-zA-Z]+[a-zA-Z0-9_]*$/)
+    desc TextBlob
+}
+relationship ManyToOne {
+	CommissionAuditStatus{status} to Status
+}
+
+/**
+ * 佣金记录：
+ * @author bobying.
+ */
+entity Commission {
+    code String required minlength(1)  maxlength(20) pattern(/^[a-zA-Z]+[a-zA-Z0-9_]*$/)
+    desc TextBlob
+    /**
+     * 佣金来源
+     */
+    source String
+    sourceId String
+    params String
+    createdDate Instant
+}
+relationship ManyToOne {
+	Commission{rule} to CommissionRule
+	Commission{owner} to Merchant
+	Commission{applyTo} to Merchant
+	Commission{auditStatus} to CommissionAuditStatus
+}
+
+
+// Set pagination options
+// paginate JobHistory, Employee with infinite-scroll
+// paginate Job with pagination
+
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceClass
+// Set an angular suffix
+angularSuffix * with bob
